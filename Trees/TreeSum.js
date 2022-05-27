@@ -5,10 +5,23 @@ class Node {
     this.right = null;
   }
 }
-
+// recursive
 const depthTreeSum = (root) => {
   if (root === null) return 0;
   return root.val + depthTreeSum(root.left) + depthTreeSum(root.right);
+};
+// iterative
+const breadthTreeSum = (root) => {
+  if (root === null) return 0;
+  let totalSum = 0;
+  const queue = [root];
+  while (queue.length > 0) {
+    const curr = queue.shift(0);
+    totalSum += curr.val;
+    if (curr.left != null) queue.push(curr.left);
+    if (curr.right != null) queue.push(curr.right);
+  }
+  return totalSum;
 };
 
 const a = new Node(5);
@@ -23,4 +36,4 @@ b.right = e;
 a.right = c;
 c.right = f;
 
-console.log(depthTreeSum(a));
+console.log(breadthTreeSum(a));
